@@ -1,0 +1,42 @@
+
+.play{
+
+}
+
+.playerContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.player {
+
+}
+
+.active {
+    background-color: var(--highlighted-color);
+}
+
+.sheet {
+
+}
+
+.figure {
+    display: flex;
+    gap: 1rem;
+    font-size: .7rem;
+}
+
+.col1 {
+    width: 5rem
+}
+
+.col2 {
+    width: 4rem;
+}
+
+.dice {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}

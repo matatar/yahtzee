@@ -1,0 +1,39 @@
+.die {
+    width: 2rem;
+    height: 2rem;
+}
+
+.die > img {
+    height: 100%;
+    width: 100%;
+}
+.die > img path {
+    fill: white !important;
+}
+.hold {
+    border: .2rem solid var(--highlighted-color);
+    border-radius: .2rem;
+}
+/* .one{
+    mask: url(../src/assets/dice-one.svg);
+}
+
+.two{
+    mask: url(../src/assets/dice-two.svg) no-repeat center;
+}
+
+.three{
+    mask: url(../src/assets/dice-three.svg) no-repeat center;
+}
+
+.four{
+    mask: url(../src/assets/dice-four.svg) no-repeat center;
+}
+
+.five{
+    mask: url(../src/assets/dice-five.svg) no-repeat center;
+}
+
+.six{
+    mask: url(../src/assets/dice-six.svg) no-repeat center;
+} */
