@@ -13,8 +13,15 @@ function App() {
   const [dice, setDice] = useState(allNewDice())
   const [playerName, setPlayerName] = useState("")
   const [status, setStatus] = useState("setup")
-  const { t, i18n } = useTranslation()
+  const {t, i18n } = useTranslation()
+  const [currentGameId, setCurrentGameId] = useState(null)
+  const [turn, setTurn] = useState(null)
   
+  function initTurn() {
+    setTurn({
+      rollsLeft: 3 
+    })
+  }
 
   function addGame(playerName) {
     const newGame = {
@@ -58,6 +65,10 @@ function App() {
   }
   
   function rollDice() {
+    setTurn(prevTurn => ({
+      ...prevTurn,
+      rollsLeft: prevTurn.rollsLeft - 1
+    }))
     setDice(prevDice => prevDice.map(die => {
       return die.hold ? die : newDie()
     }))
@@ -71,11 +82,7 @@ function App() {
     }))
   }
 
-  const [currentGameId, setCurrentGameId] = useState(null)
-  // TODO: implement
-  const calcObject = {
-
-  }
+  
   
   function handlePlayerAdd(e) {
     e.preventDefault()
@@ -97,10 +104,25 @@ function App() {
   function handleStartButton(){
     if (games.length >= 2) {
       setCurrentGameId(games[0].id)
+      initTurn()
       setStatus("playing") 
     } else {
       //TODO: Message mehr Spieler benötigt
     }
+  }
+
+  function nextTurn(){
+    for (let i = 0; i < games.length; i++) {
+      initTurn();
+      if (i === games.length - 1) {
+        setCurrentGameId(games[0].id)
+        return
+      }
+      if (games[i].id === currentGameId) {
+        setCurrentGameId(games[i+1].id)
+        return
+      }
+    }     
   }
 
   function handleFigureClick(e) {
@@ -143,9 +165,10 @@ function App() {
           currentGameId={currentGameId}
           dieElements={dieElements}
           t={t}
-          calcObject={calcObject}
+          turn={turn}
           handleFigureClick={ e => handleFigureClick(e) }
           rollDice={rollDice}
+          nextTurn={nextTurn}
         />}
       </div>
     </>

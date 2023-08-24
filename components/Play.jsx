@@ -8,9 +8,10 @@ export default class Play extends React.Component {
             games, 
             currentGameId,
             t,
-            calcObject,
+            turn,
             rollDice,
-            dieElements
+            dieElements,
+            nextTurn,
         } = this.props
         return(
             <>
@@ -51,7 +52,8 @@ export default class Play extends React.Component {
                                             {dieElements}
                                         </div>
                                         <div>
-                                            <button className="btn-outline" onClick={rollDice}>{t('play_rollDice')}</button>
+                                            {turn.rollsLeft > 0 && <button className="btn-outline" onClick={rollDice}>{t('play_rollDice')}</button>}
+                                            {turn.rollsLeft === 0 && <button className="btn-outline" onClick={nextTurn}>{t('play_nextTurn')}</button>}
                                         </div>
                                     </div>
                                 )
