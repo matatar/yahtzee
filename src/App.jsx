@@ -64,7 +64,7 @@ function App() {
     })
   }
   
-  function rollDice() {
+  function handleRollDice() {
     setTurn(prevTurn => ({
       ...prevTurn,
       rollsLeft: prevTurn.rollsLeft - 1
@@ -82,7 +82,12 @@ function App() {
     }))
   }
 
-  
+  function releaseAllDice() {
+    setDice(prevDice => prevDice.map(die => ({
+      ...die,
+      hold: false
+    })))    
+  }
   
   function handlePlayerAdd(e) {
     e.preventDefault()
@@ -111,9 +116,10 @@ function App() {
     }
   }
 
-  function nextTurn(){
+  function handleNextTurn(){
+    initTurn();
+    releaseAllDice(); 
     for (let i = 0; i < games.length; i++) {
-      initTurn();
       if (i === games.length - 1) {
         setCurrentGameId(games[0].id)
         return
@@ -167,8 +173,8 @@ function App() {
           t={t}
           turn={turn}
           handleFigureClick={ e => handleFigureClick(e) }
-          rollDice={rollDice}
-          nextTurn={nextTurn}
+          handleRollDice={handleRollDice}
+          handleNextTurn={handleNextTurn}
         />}
       </div>
     </>

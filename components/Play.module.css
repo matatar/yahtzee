@@ -40,3 +40,7 @@
     flex-direction: row;
     gap: 2rem;
 }
+
+.invisible{
+    visibility: hidden;
+}

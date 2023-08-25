@@ -9,9 +9,9 @@ export default class Play extends React.Component {
             currentGameId,
             t,
             turn,
-            rollDice,
+            handleRollDice,
             dieElements,
-            nextTurn,
+            handleNextTurn,
         } = this.props
 
         //TODO: export to utils
@@ -23,7 +23,7 @@ export default class Play extends React.Component {
           
             return result;
           };
-          
+        
         const currentGame = games.filter(game => game.id === currentGameId)
         const total = falsyToZero(currentGame.ones)
             + falsyToZero(currentGame.two)  + falsyToZero(currentGame.threes)
@@ -36,7 +36,7 @@ export default class Play extends React.Component {
             + falsyToZero(currentGame.largeStraight) + falsyToZero(currentGame.yahtzee)
             + falsyToZero(currentGame.chance)
         const grandTotal = totalUpper + totalLower
-
+        const classNameDice = `${style.dice} ${(turn.rollsLeft === 3 ) && style.invisible}`
         return(
             <>
                 <div className={style.play}>
@@ -69,12 +69,12 @@ export default class Play extends React.Component {
                             <div className={style.figure}><div className={style.col1}>{t('play_totalUpper')}</div><div className={style.col2}></div><div className={style.col1}>{totalUpper}</div></div>
                             <div className={style.figure}><div className={style.col1}>{t('play_grandTotal')}</div><div className={style.col2}></div><div className={style.col1}>{grandTotal}</div></div>
                         </div>
-                        <div className={style.dice}>
+                        <div className={classNameDice}>
                             {dieElements}
                         </div>
                         <div>
-                            {turn.rollsLeft > 0 && <button className="btn-outline" onClick={rollDice}>{t('play_rollDice')}</button>}
-                            {turn.rollsLeft === 0 && <button className="btn-outline" onClick={nextTurn}>{t('play_nextTurn')}</button>}
+                            {turn.rollsLeft > 0 && <button className="btn-outline" onClick={handleRollDice}>{t('play_rollDice')}</button>}
+                            {turn.rollsLeft === 0 && <button className="btn-outline" onClick={handleNextTurn}>{t('play_nextTurn')}</button>}
                         </div>
                     </div>
                 </div>
