@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Play.module.css"
-
+import falsyToZero from "../utils/falsyToZero";
 
 export default class Play extends React.Component {
     render() {
@@ -13,16 +13,6 @@ export default class Play extends React.Component {
             dieElements,
             handleNextTurn,
         } = this.props
-
-        //TODO: export to utils
-        const falsyToZero = (value) => {
-            let result = Number(value);
-            if(Number.isNaN(result)){
-              result = 0;
-            }
-          
-            return result;
-          };
         
         const currentGame = games.filter(game => game.id === currentGameId)
         const total = falsyToZero(currentGame.ones)
