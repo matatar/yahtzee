@@ -84,6 +84,7 @@ function App() {
   useEffect(() => calculateScore(), [dice])
 
   function calculateScore() {
+    if (turn === null) return
     const calcResult = {
       ones: null,
       twos: null,
@@ -124,40 +125,40 @@ function App() {
       }    
     }
     const duplicates = findDuplicates(values)
-    if (duplicates.length === 0) return
     let isThreeOfAKind = false
     let isPair = false
     for (let duplicate of duplicates) {
       const arr = values.filter(value => value === duplicate)
-      isPair = (arr.length === 2)
+      if (arr.length === 2) isPair = true
       if (arr.length >= 3) {
         isThreeOfAKind = true
         calcResult.threeOfAKind = duplicate * 3
-      }
-      if (isPair && isThreeOfAKind) {
-        calcResult.fullHouse = 25
       }
       if (arr.length >= 4) {
         calcResult.fourOfAKind = duplicate * 4
       }
       if (arr.length === 5) {
         calcResult.yahtzee = 50
-      }
-      //TODO: fix straits
-      // small straight: 1,2,3,4 | 2,3,4,5 | 3,4,5,6
-      if (isContainedIn([1,2,3,4], values) || isContainedIn([2,3,4,5], values) || isContainedIn([3,4,5,6], values)) {
-        calcResult.smallStraight = 30
-      }
-      // large straight: 1,2,3,4,5 | 2,3,4,5,6
-      if (isContainedIn([1,2,3,4,5], values) || isContainedIn([2,3,4,5,6], values)) {
-        calcResult.largeStraight = 40
-      }
+      }  
     }
+    
+    if (isContainedIn(values, [1,2,3,4]) || isContainedIn(values, [2,3,4,5]) || isContainedIn(values, [3,4,5,6])) {
+      calcResult.smallStraight = 30
+    }
+    if (isPair && isThreeOfAKind) {
+      calcResult.fullHouse = 25
+    }
+
+    if (isContainedIn(values, [1,2,3,4,5]) || isContainedIn(values, [2,3,4,5,6])) {
+      calcResult.largeStraight = 40
+    }
+
     setTurn(prev => ({
       rollsLeft: prev.rollsLeft,
       ...calcResult
     }))
   }
+
   function holdDice(id) {
     setDice(prevDice => prevDice.map(die => {
       if (die.id===id) 
