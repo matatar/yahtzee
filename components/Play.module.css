@@ -2,7 +2,9 @@
 .play{
 
 }
-
+hr {
+    color: var(--secondary-color);
+}
 .playerContainer{
     display: flex;
     flex-direction: row;
@@ -34,7 +36,9 @@
 .col2 {
     width: 4rem;
 }
-
+.col3 {
+    width: 2rem;
+}
 .dice {
     display: flex;
     flex-direction: row;
@@ -47,4 +51,5 @@
 
 .highlighted{
     color: var(--highlighted-color);
+    cursor: pointer;
 }

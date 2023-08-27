@@ -84,7 +84,11 @@ function App() {
   useEffect(() => calculateScore(), [dice])
 
   function calculateScore() {
-    if (turn === null) return
+    if (turn === null || turn.rollsLeft === 3) return
+    
+    //TODO: make this more dry
+    const [currentGame] = games.filter(game => game.id === currentGameId)
+    
     const calcResult = {
       ones: null,
       twos: null,
@@ -97,30 +101,31 @@ function App() {
       fullHouse: null,
       smallStraight: null,
       largeStraight: null,
-      chance: 0,
-      yahtzee: null,
+      chance: null,
+      yahtzee: null
     }
+    
     const values = dice.map(die => die.value)
     for (let value of values) {
-      calcResult.chance = calcResult.chance + value
+      if (currentGame.chance === null) calcResult.chance = calcResult.chance + value
       switch (value) {
         case 1:  
-          calcResult.ones = falsyToZero(calcResult.ones) + 1
+          if (currentGame.ones === null) calcResult.ones = falsyToZero(calcResult.ones) + 1
           break
         case 2:  
-          calcResult.twos = falsyToZero(calcResult.twos) + 2
+          if (currentGame.twos === null) calcResult.twos = falsyToZero(calcResult.twos) + 2
           break
         case 3:  
-          calcResult.threes = falsyToZero(calcResult.threes) + 3
+          if (currentGame.threes === null) calcResult.threes = falsyToZero(calcResult.threes) + 3
           break
         case 4:  
-          calcResult.fours = falsyToZero(calcResult.fours) + 4
+          if (currentGame.fours === null) calcResult.fours = falsyToZero(calcResult.fours) + 4
           break
         case 5:  
-          calcResult.fives = falsyToZero(calcResult.fives) + 5
+          if (currentGame.fives === null) calcResult.fives = falsyToZero(calcResult.fives) + 5
           break
         case 6:  
-          calcResult.sixes = falsyToZero(calcResult.sixes) + 6
+          if (currentGame.sixes === null) calcResult.sixes = falsyToZero(calcResult.sixes) + 6
           break
       }    
     }
@@ -132,25 +137,28 @@ function App() {
       if (arr.length === 2) isPair = true
       if (arr.length >= 3) {
         isThreeOfAKind = true
-        calcResult.threeOfAKind = duplicate * 3
+        if (currentGame.threeOfAKind === null) calcResult.threeOfAKind = duplicate * 3
       }
-      if (arr.length >= 4) {
+
+      if (arr.length >= 4 && currentGame.fourOfAKind === null) {
         calcResult.fourOfAKind = duplicate * 4
       }
-      if (arr.length === 5) {
+
+      if (arr.length === 5 && currentGame.yahtzee === null) {
         calcResult.yahtzee = 50
       }  
     }
     
-    if (isContainedIn(values, [1,2,3,4]) || isContainedIn(values, [2,3,4,5]) || isContainedIn(values, [3,4,5,6])) {
-      calcResult.smallStraight = 30
-    }
-    if (isPair && isThreeOfAKind) {
+    if (isPair && isThreeOfAKind && currentGame.fullHouse === null) {
       calcResult.fullHouse = 25
     }
 
+    if (isContainedIn(values, [1,2,3,4]) || isContainedIn(values, [2,3,4,5]) || isContainedIn(values, [3,4,5,6])) {
+      if (currentGame.smallStraight === null) calcResult.smallStraight = 30
+    }
+
     if (isContainedIn(values, [1,2,3,4,5]) || isContainedIn(values, [2,3,4,5,6])) {
-      calcResult.largeStraight = 40
+      if (currentGame.largeStraight === null) calcResult.largeStraight = 40
     }
 
     setTurn(prev => ({
@@ -166,7 +174,7 @@ function App() {
       else return die
     }))
   }
-
+  
   function releaseAllDice() {
     setDice(prevDice => prevDice.map(die => ({
       ...die,
@@ -217,8 +225,14 @@ function App() {
   }
 
   function handleFigureClick(e) {
-    //TODO: implementation
-    console.log("Figure clicked")
+    setGames(prev => prev.map(game => {
+      if (game.id === currentGameId)
+        return {...game, [e.target.dataset.target]: Number(e.target.innerHTML)}
+      else return game 
+    }))
+    setTurn({
+      rollsLeft: 0
+    })
   }
 
   const playerPanelElements = games.map(
