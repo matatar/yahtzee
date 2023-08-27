@@ -106,6 +106,14 @@ function App() {
     }
     
     const values = dice.map(die => die.value)
+
+    if (currentGame.ones === null) calcResult.ones = 0
+    if (currentGame.twos === null) calcResult.twos = 0
+    if (currentGame.threes === null) calcResult.threes = 0
+    if (currentGame.fours === null) calcResult.fours = 0
+    if (currentGame.fives === null) calcResult.fives = 0
+    if (currentGame.sixes === null) calcResult.sixes = 0
+    
     for (let value of values) {
       if (currentGame.chance === null) calcResult.chance = calcResult.chance + value
       switch (value) {
@@ -132,6 +140,10 @@ function App() {
     const duplicates = findDuplicates(values)
     let isThreeOfAKind = false
     let isPair = false
+    
+    if (currentGame.threeOfAKind === null) calcResult.threeOfAKind = 0
+    if (currentGame.fourOfAKind === null) calcResult.fourOfAKind = 0
+    
     for (let duplicate of duplicates) {
       const arr = values.filter(value => value === duplicate)
       if (arr.length === 2) isPair = true
@@ -143,23 +155,33 @@ function App() {
       if (arr.length >= 4 && currentGame.fourOfAKind === null) {
         calcResult.fourOfAKind = duplicate * 4
       }
+      if (currentGame.yahtzee === null) {
+        calcResult.yahtzee = 0
+        if (arr.length === 5) {
+          calcResult.yahtzee = 50
+        }  
+      }
+    }
+    if (currentGame.fullHouse === null) {
+      calcResult.fullHouse = 0
+      if (isPair && isThreeOfAKind ) {
+       calcResult.fullHouse = 25
+      }
+    }
 
-      if (arr.length === 5 && currentGame.yahtzee === null) {
-        calcResult.yahtzee = 50
-      }  
-    }
-    
-    if (isPair && isThreeOfAKind && currentGame.fullHouse === null) {
-      calcResult.fullHouse = 25
+    if (currentGame.smallStraight === null) {
+      calcResult.smallStraight = 0
+      if (isContainedIn(values, [1,2,3,4]) || isContainedIn(values, [2,3,4,5]) || isContainedIn(values, [3,4,5,6])) {
+        calcResult.smallStraight = 30
+      }
     }
 
-    if (isContainedIn(values, [1,2,3,4]) || isContainedIn(values, [2,3,4,5]) || isContainedIn(values, [3,4,5,6])) {
-      if (currentGame.smallStraight === null) calcResult.smallStraight = 30
-    }
-
-    if (isContainedIn(values, [1,2,3,4,5]) || isContainedIn(values, [2,3,4,5,6])) {
-      if (currentGame.largeStraight === null) calcResult.largeStraight = 40
-    }
+    if (currentGame.largeStraight === null) {
+      calcResult.largeStraight = 0
+      if (isContainedIn(values, [1,2,3,4,5]) || isContainedIn(values, [2,3,4,5,6])) {
+        calcResult.largeStraight = 40
+      }
+    } 
 
     setTurn(prev => ({
       rollsLeft: prev.rollsLeft,
