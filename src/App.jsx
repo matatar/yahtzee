@@ -23,7 +23,7 @@ function App() {
   function initTurn() {
     setTurn({
       rollsLeft: 3
-    })
+     })
   }
 
   function addGame(playerName) {

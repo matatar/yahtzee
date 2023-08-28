@@ -65,9 +65,10 @@ export default class Play extends React.Component {
                             <div className={style.figure}><div className={style.col1}>{t('play_grandTotal')}</div><div className={style.col2}></div><div className={style.col3}>{grandTotal}</div></div>
                         </div>
                         <div>
-                            <div>
+                            <div className="container">
                                 {turn.rollsLeft > 0 && <button className="btn-outline" onClick={handleRollDice}>{t('play_rollDice')}</button>}
                                 {turn.rollsLeft === 0 && <button className={classNameNextTurnButton} onClick={handleNextTurn}>{t('play_nextTurn')}</button>}
+                                <div>{t('play_rollsLeft')}: {turn.rollsLeft}</div>
                             </div>
                             <div className={classNameDice}>
                                 {dieElements}

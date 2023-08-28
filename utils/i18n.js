@@ -69,7 +69,8 @@ const resources = {
       play_totalLower: "gesamter unterer Teil",
       play_grandTotal: "Endsumme",
       play_rollDice: "Würfeln",
-      play_nextTurn: "nächster Spieler"
+      play_nextTurn: "nächster Spieler",
+      play_rollsLeft: "Würfe übrig"
     },
   },
 };
