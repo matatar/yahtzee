@@ -1,14 +1,18 @@
 :root {
     --primary-color: hsl(0 0% 100%);
-    --secondary-color: hsl(0 0% 37%);
+    --background-element-color: hsl(0 0% 70%);
+    --secondary-color: hsl(0 0% 27%);
     --highlighted-color: hsl(203, 100%, 59%);
+    --inactive-color: hsl(0, 0%, 40%);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --primary-color: hsl(0 0% 37%);
+        --primary-color: hsl(0 0% 33%);
+        --background-element-color: hsl(0 0% 20%);
         --secondary-color: hsl(0 0% 100%);
-        --highlighted-color: hsl(36, 97%, 42%);    
+        --highlighted-color: hsl(36, 97%, 42%);
+        --inactive-color: hsl(0, 0%, 40%);    
     }
 }
 
@@ -33,9 +37,9 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 1.2rem;
     width: auto;
-    margin: 2rem;
+    margin-left: 2rem;
+    gap: 1rem;
 }
 
 

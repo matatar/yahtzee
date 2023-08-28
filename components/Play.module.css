@@ -6,21 +6,26 @@ hr {
     color: var(--secondary-color);
 }
 .playerContainer{
+    margin-left: 2.7rem;
     display: flex;
     flex-direction: row;
-    gap: 5rem;
 }
 
 .player {
-
+    width: 4rem;
+    text-align: center;
+    background-color: var(--inactive-color);    
 }
 
-.active {
-    background-color: var(--highlighted-color);
+.active  {
+    color: var(--highlighted-color) !important;
+    background-color: var(--background-element-color) !important;
 }
 
 .sheet {
-
+    background-color: var(--background-element-color);
+    padding: 1rem 3rem;
+    border-radius: 1rem;
 }
 
 .figure {
