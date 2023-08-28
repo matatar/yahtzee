@@ -232,6 +232,7 @@ function App() {
   }
 
   function handleNextTurn(){
+    if (turn.hasOwnProperty('ones')) return
     initTurn();
     releaseAllDice(); 
     for (let i = 0; i < games.length; i++) {
@@ -280,6 +281,7 @@ function App() {
       <h1>{t('header')}</h1>
       <div className='container'>
         {status === "setup" && <Setup
+          games={games}
           playerName={playerName} 
           handlePlayerAdd={ e => handlePlayerAdd(e) } 
           playerPanelElements={playerPanelElements}

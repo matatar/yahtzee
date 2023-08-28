@@ -53,3 +53,8 @@ body {
     cursor: pointer;
     line-height: 1.5rem;
 }
+
+.disabled {
+    color : var(--inactive-color);
+    border-color: var(--inactive-color);   
+}

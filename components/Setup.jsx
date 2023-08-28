@@ -3,6 +3,7 @@ import styles from './Setup.module.css';
 
 export default class Setup extends React.Component {
     render() {
+        const classNameStartButton = this.props.games.length < 2 ? 'btn-outline disabled' : 'btn-outline'
         return (
         <div className='container'>
             <div className={styles.setup}>
@@ -22,7 +23,7 @@ export default class Setup extends React.Component {
                         +
                     </button>
                 </form>
-                <button className="btn-outline" onClick={this.props.handleStartButton}>{this.props.t('setup_startGame')}</button>
+                <button className={classNameStartButton} onClick={this.props.handleStartButton}>{this.props.t('setup_startGame')}</button>
             </div>
         </div>
         )

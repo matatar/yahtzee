@@ -28,7 +28,7 @@ export default class Play extends React.Component {
             + falsyToZero(currentGame.chance)
         const grandTotal = totalUpper + totalLower
         const classNameDice = `${style.dice} ${(turn.rollsLeft === 3 ) && style.invisible}`
-        
+        const classNameNextTurnButton = (turn.hasOwnProperty('ones')) ? 'btn-outline disabled' : 'btn-outline' 
         return(
             <>
                 <div className={style.play}>
@@ -67,7 +67,7 @@ export default class Play extends React.Component {
                         <div>
                             <div>
                                 {turn.rollsLeft > 0 && <button className="btn-outline" onClick={handleRollDice}>{t('play_rollDice')}</button>}
-                                {turn.rollsLeft === 0 && <button className="btn-outline" onClick={handleNextTurn}>{t('play_nextTurn')}</button>}
+                                {turn.rollsLeft === 0 && <button className={classNameNextTurnButton} onClick={handleNextTurn}>{t('play_nextTurn')}</button>}
                             </div>
                             <div className={classNameDice}>
                                 {dieElements}
