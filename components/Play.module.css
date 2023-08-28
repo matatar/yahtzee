@@ -45,6 +45,10 @@ hr {
     width: 2rem;
 }
 .dice {
+    margin-top: 1rem;
+    padding: .5rem;
+    border-radius: .2rem;
+    background-color: var(--background-element-color);
     display: flex;
     flex-direction: row;
     gap: 2rem;

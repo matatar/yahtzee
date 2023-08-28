@@ -1,14 +1,26 @@
 
 .setup {
-    color: var(--secondary-color);
+    background-color: var(--background-element-color);
     display: flex;
-
+    flex-direction: column;
+    padding: 1rem 2rem;
+    gap: .5rem;
+    min-width: 300px;
+    justify-content: space-between;
+    border-radius: 1rem;
 }
 
 .setup__player-input {
     background-color: var(--primary-color);
     color: var(--secondary-color);
+    padding: .5rem;
+    border-radius: .3rem;
 }
 
-
-
+.setupAddButton {
+    margin-left: 5rem;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: larger;
+    padding: .2rem .5rem;
+    color: var(--highlighted-color);
+}
