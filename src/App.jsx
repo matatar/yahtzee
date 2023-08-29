@@ -9,7 +9,7 @@ import Die from '../components/Die';
 import falsyToZero from '../utils/falsyToZero';
 import findDuplicates from '../utils/findDuplicates';
 import isContainedIn from '../utils/isContainedIn';
-
+import End from '../components/End';
 function App() {
 
   const [games, setGames] = useState([])
@@ -82,6 +82,18 @@ function App() {
   }
   
   useEffect(() => calculateScore(), [dice])
+  useEffect(() => checkGameEnd(), [games])
+
+  function isGameEnd() {
+    for (let game of games) {
+      if (Object.values(game).includes(null)) return false
+    }
+    return true
+  }
+
+  function checkGameEnd() {
+    if (status === "playing" && isGameEnd()) setStatus("end")
+  }
 
   function calculateScore() {
     if (turn === null || turn.rollsLeft === 3) return
@@ -298,6 +310,9 @@ function App() {
           handleFigureClick={ e => handleFigureClick(e) }
           handleRollDice={handleRollDice}
           handleNextTurn={handleNextTurn}
+        />}
+        {status === "end" && <End
+          games={games}
         />}
       </div>
     </>

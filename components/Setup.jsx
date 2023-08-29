@@ -20,7 +20,7 @@ export default class Setup extends React.Component {
                         placeholder={this.props.t('setup_playerAdd')} 
                     />
                     <button className={`btn-outline ${styles.setupAddButton}`} type="submit"  >
-                        +
+                        <span>+</span>
                     </button>
                 </form>
                 <button className={classNameStartButton} onClick={this.props.handleStartButton}>{this.props.t('setup_startGame')}</button>
