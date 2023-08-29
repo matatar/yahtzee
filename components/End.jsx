@@ -1,8 +1,9 @@
 import React from "react";
-
-export default class End extends React.PureComponent {
+import styles from "./End.module.css";
+export default class End extends React.Component {
     render() {
-        const [games] = this.props
+        const {games} = this.props
+        console.log(games)
         const result = []
         for (let game of games) {
             let upperTotal = game.ones + game.twos + game.threes + game.fours + game.fives + game.sixes
@@ -16,7 +17,11 @@ export default class End extends React.PureComponent {
         }
         result.sort((a, b) => b.grandTotal - a.grandTotal)
         return <div className={styles.end}>
-            {result.map(player => <div className={styles.player}><span>{player.playerName}</span><span>{player.grandTotal}</span></div>)}
+            {result.map((player, index) => <div className={styles.player}>
+                <span>{index+1}.</span>
+                <span>{player.playerName}</span>
+                <span>{player.grandTotal}</span>
+            </div>)}
         </div>
     }
 }

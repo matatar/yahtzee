@@ -238,6 +238,24 @@ function App() {
       setCurrentGameId(games[0].id)
       initTurn()
       setStatus("playing") 
+      //test
+      setGames(prev => prev.map(game => ({
+        playerName: game.playerName,
+        id: game.id,
+        ones: null,
+      twos: 8,
+      threes: 15,
+      fours: 20,
+      fives: 25,
+      sixes: 30,
+      threeOfAKind: 0,
+      fourOfAKind: 17,
+      fullHouse: 25,
+      smallStraight: 30,
+      largeStraight: 40,
+      chance: 25,
+      yahtzee: 50
+      })))
     } else {
       //TODO: Message mehr Spieler benötigt
     }
