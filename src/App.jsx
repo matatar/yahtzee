@@ -239,7 +239,7 @@ function App() {
       initTurn()
       setStatus("playing") 
       //test
-      setGames(prev => prev.map(game => ({
+      /* setGames(prev => prev.map(game => ({
         playerName: game.playerName,
         id: game.id,
         ones: null,
@@ -255,7 +255,7 @@ function App() {
       largeStraight: 40,
       chance: 25,
       yahtzee: 50
-      })))
+      }))) */
     } else {
       //TODO: Message mehr Spieler benötigt
     }

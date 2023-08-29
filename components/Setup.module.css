@@ -16,6 +16,9 @@
     padding: .5rem;
     border-radius: .3rem;
 }
+.setup__player-input:focus {
+    outline: none;
+}
 
 .setupAddButton {
     margin-left: 5rem;
