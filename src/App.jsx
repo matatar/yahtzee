@@ -260,6 +260,7 @@ function App() {
   }
 
   function handleFigureClick(e) {
+    if (e.target.innerHTML==="") return
     setGames(prev => prev.map(game => {
       if (game.id === currentGameId)
         return {...game, [e.target.dataset.target]: Number(e.target.innerHTML)}
