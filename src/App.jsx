@@ -1,15 +1,16 @@
 import { useState, useEffect,useRef } from 'react'
 import './App.css'
-import Setup from '../components/Setup'
 import { v4 as uuidv4 } from 'uuid';
-import PlayerPanel from '../components/PlayerPanel';
 import { useTranslation } from 'react-i18next';
+import Setup from '../components/Setup'
+import End from '../components/End';
+import PlayerPanel from '../components/PlayerPanel';
 import Play from '../components/Play';
 import Die from '../components/Die';
+import LanguageSelect from '../components/LanguageSelect';
 import falsyToZero from '../utils/falsyToZero';
 import findDuplicates from '../utils/findDuplicates';
 import isContainedIn from '../utils/isContainedIn';
-import End from '../components/End';
 function App() {
 
   const [games, setGames] = useState([])
@@ -289,6 +290,9 @@ function App() {
     })
   }
 
+  function handleLanguageSelect(e) {
+    i18n.changeLanguage(e.target.value)
+  }
   const playerPanelElements = games.map(
     game =>
       <PlayerPanel 
@@ -309,6 +313,9 @@ function App() {
  
   return (
     <>
+      <div className="container">
+        <LanguageSelect handleLanguageSelect={e => handleLanguageSelect(e)} />
+      </div>
       <h1>{t('header')}</h1>
       <div className='container'>
         {status === "setup" && <Setup
