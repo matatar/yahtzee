@@ -43,6 +43,8 @@ const resources = {
       play_grandTotal: "Grand Total",
       play_rollDice: "Roll Dice",
       play_rollsLeft: "Rolls Left",
+      play_nextTurn: "Next Turn",
+      play_add: "Add "
     },
   },
   de: {
@@ -86,7 +88,8 @@ const resources = {
       play_grandTotal: "Endsumme",
       play_rollDice: "Würfeln",
       play_nextTurn: "nächster Spieler",
-      play_rollsLeft: "Würfe übrig"
+      play_rollsLeft: "Würfe übrig",
+      play_add: "plus "
     },
   },
 };
