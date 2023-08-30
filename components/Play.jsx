@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Play.module.css"
 import falsyToZero from "../utils/falsyToZero";
-
+import sumUpScore from "../utils/sumUpScore";
 export default class Play extends React.Component {
     render() {
         const {
@@ -16,17 +16,7 @@ export default class Play extends React.Component {
         } = this.props
         
         const [currentGame] = games.filter(game => game.id === currentGameId)
-        const total = falsyToZero(currentGame.ones)
-            + falsyToZero(currentGame.two)  + falsyToZero(currentGame.threes)
-            + falsyToZero(currentGame.fours) + falsyToZero(currentGame.fives)
-            + falsyToZero(currentGame.sixes)        
-        const bonus = total >= 63  ? 35 : 0
-        const totalUpper = total + bonus
-        const totalLower = falsyToZero(currentGame.threeOfAKind) + falsyToZero(currentGame.fourOfAKind)
-            + falsyToZero(currentGame.fullHouse) + falsyToZero(currentGame.smallStraight)
-            + falsyToZero(currentGame.largeStraight) + falsyToZero(currentGame.yahtzee)
-            + falsyToZero(currentGame.chance)
-        const grandTotal = totalUpper + totalLower
+        const [total, bonus, totalUpper, totalLower, grandTotal] = sumUpScore(currentGame)
         const classNameDice = `${style.dice} ${(turn.rollsLeft === 3 ) && style.invisible}`
         const classNameNextTurnButton = (turn.hasOwnProperty('ones')) ? 'btn-outline disabled' : 'btn-outline' 
         return(
